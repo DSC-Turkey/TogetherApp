@@ -9,10 +9,10 @@ class Neighborhood extends StatefulWidget {
 }
 
 class _NeighborhoodState extends State<Neighborhood> {
-  var gelenYaziBasligi = "";
-  var gelenYaziIcerigi = "";
+  int gelenYaziBasligi = 0;
+  int gelenYaziIcerigi = 0;
 
-  yaziGetir(Mahalle mahalle) {
+  yaziGetir(Sehir mahalle) {
     FirebaseFirestore.instance
         .collection("Mahalleler")
         .doc(mahalle.neighborhood)
@@ -27,13 +27,17 @@ class _NeighborhoodState extends State<Neighborhood> {
 
   @override
   Widget build(BuildContext context) {
-    final Mahalle iletilenArgumanlar =
-        ModalRoute.of(context).settings.arguments;
+    final Sehir iletilenArgumanlar = ModalRoute.of(context).settings.arguments;
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
           yaziGetir(iletilenArgumanlar);
         }));
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("${iletilenArgumanlar.neighborhood} Mahallesi"),
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+        ),
         resizeToAvoidBottomPadding: false,
         backgroundColor: Color(0xFF0E0B12),
         body: Column(
@@ -44,7 +48,7 @@ class _NeighborhoodState extends State<Neighborhood> {
               ),
             ),
             Text(
-              gelenYaziIcerigi,
+              gelenYaziIcerigi.toString(),
               style: kButtonTitle,
             ),
           ],

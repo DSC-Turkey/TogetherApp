@@ -6,6 +6,7 @@ import 'package:login_screen2/register_page.dart';
 import 'package:login_screen2/welcome.dart';
 import 'package:login_screen2/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'grid_view.dart';
 import 'neighborhood_pick.dart';
 
 Future<void> main() async {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         "/register": (context) => Register(),
         "/neighborhood": (context) => NeighborhoodPage(),
         "/page": (context) => Neighborhood(),
+        "/gridview": (context) => ListViewDemo(),
       },
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,

@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  font_awesome_flutter: ^8.11.0
+  curved_navigation_bar: ^0.3.7
   pedantic: ^1.9.0
   google_sign_in: ^4.5.9
   firebase_core: ^0.7.0

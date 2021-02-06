@@ -30,7 +30,7 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    "Pick Neighborhood",
+                    "Pick City",
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
@@ -40,16 +40,16 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
                 ),
                 StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
-                      .collection("Mahalleler")
+                      .collection("Cities")
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return Text("Loading");
                     } else {
-                      List<DropdownMenuItem> mahalleler = [];
+                      List<DropdownMenuItem> sehirler = [];
                       for (int i = 0; i < snapshot.data.docs.length; i++) {
                         DocumentSnapshot snap = snapshot.data.docs[i];
-                        mahalleler.add(
+                        sehirler.add(
                           DropdownMenuItem(
                             child: Text(
                               snap.id,
@@ -60,7 +60,7 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
                       }
                       return DropdownButton(
                         style: TextStyle(color: Colors.blue),
-                        items: mahalleler,
+                        items: sehirler,
                         onChanged: (neighborhood) {
                           setState(() {
                             selectedN = neighborhood;
@@ -75,8 +75,8 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
-                      "/page",
-                      arguments: Mahalle(
+                      "/gridview",
+                      arguments: Sehir(
                         neighborhood: selectedN,
                       ),
                     );
@@ -95,7 +95,7 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
   }
 }
 
-class Mahalle {
+class Sehir {
   String neighborhood;
-  Mahalle({this.neighborhood});
+  Sehir({this.neighborhood});
 }
