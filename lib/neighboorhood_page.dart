@@ -29,6 +29,9 @@ class _NeighborhoodState extends State<Neighborhood> {
   Widget build(BuildContext context) {
     final Mahalle iletilenArgumanlar =
         ModalRoute.of(context).settings.arguments;
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          yaziGetir(iletilenArgumanlar);
+        }));
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -38,12 +41,6 @@ class _NeighborhoodState extends State<Neighborhood> {
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
-              ),
-              child: FlatButton(
-                onPressed: () {
-                  yaziGetir(iletilenArgumanlar);
-                },
-                child: Text("Bas"),
               ),
             ),
             Text(
