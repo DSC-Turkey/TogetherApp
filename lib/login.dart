@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_screen2/components.dart';
+import 'package:pedantic/pedantic.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _LoginState extends State<Login> {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: uName.text, password: pass.text)
         .then((value) {
-      Navigator.pushNamed(context, "/");
+      Navigator.pushNamed(context, "/neighborhood");
     });
   }
 
