@@ -1,6 +1,6 @@
-# login_screen2
+# Together App
 
-A new Flutter application.
+Our Flutter Hackathon App.
 
 ## Getting Started
 
