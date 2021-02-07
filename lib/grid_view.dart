@@ -24,7 +24,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
   var gelenOy5;
   var gelenOy6;
   var gelenOy7;
-  var gelenOy8;
   var gelenOy9;
   var gelenOy10;
   int flag = 0;
@@ -135,19 +134,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
     return gelenOy7;
   }
 
-  int oyGetir8(Sehir sehir) {
-    FirebaseFirestore.instance
-        .collection("Cities")
-        .doc(sehir.neighborhood)
-        .get()
-        .then((gelenVeri) {
-      setState(() {
-        gelenOy8 = gelenVeri.data()["ElektrikliTopluTasima"];
-      });
-    });
-    return gelenOy8;
-  }
-
   int oyGetir9(Sehir sehir) {
     FirebaseFirestore.instance
         .collection("Cities")
@@ -183,12 +169,11 @@ class _ListViewDemoState extends State<ListViewDemo> {
     int oy4 = oyGetir4(iletilenArgumanlar);
     int oy6 = oyGetir6(iletilenArgumanlar);
     int oy7 = oyGetir7(iletilenArgumanlar);
-    int oy8 = oyGetir8(iletilenArgumanlar);
     int oy9 = oyGetir9(iletilenArgumanlar);
     int oy10 = oyGetir10(iletilenArgumanlar);
     var _screenWidth = MediaQuery.of(context).size.width;
     var _itemCount = (_screenWidth / 200).ceil();
-    int total = oy + oy2 + oy3 + oy4 + oy6 + oy7 + oy8 + oy9 + oy10;
+    int total = oy + oy2 + oy3 + oy4 + oy6 + oy7 + oy9 + oy10;
 
     return Scaffold(
       extendBody: true,
@@ -216,7 +201,11 @@ class _ListViewDemoState extends State<ListViewDemo> {
         },
       ),
       appBar: AppBar(
-        title: Text("${iletilenArgumanlar.neighborhood}"),
+        backgroundColor: Color(0xffffa931),
+        title: Text(
+          "${iletilenArgumanlar.neighborhood}",
+          style: TextStyle(fontFamily: "Poppins"),
+        ),
         centerTitle: true,
       ),
       body: GridView(
@@ -228,7 +217,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
           CustomContainer(
             yazi: "Geri Dönüşüm",
             subtext: oy.toString(),
-            imagePath: "assets/eco_ev.jpg",
+            imagePath: "assets/Oylama/Recycle.png",
             function: () {
               total++;
               setState(() {
@@ -270,6 +259,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
           CustomContainer(
             yazi: "Güneş Enerjili Sokak Lambaları",
             subtext: oy2.toString(),
+            imagePath: "assets/Oylama/solarstreet.png",
             function: () {
               setState(() {
                 total++;
@@ -311,6 +301,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
           CustomContainer(
             yazi: "Yeşil Alan",
             subtext: oy3.toString(),
+            imagePath: "assets/Oylama/Greenpark.png",
             function: () {
               setState(() {
                 if (flag == 0) {
@@ -352,6 +343,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
           CustomContainer(
             yazi: "Organik Pazar",
             subtext: oy4.toString(),
+            imagePath: "assets/Oylama/OrganicBazaar.png",
             function: () {
               setState(() {
                 if (flag == 0) {
@@ -393,6 +385,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
           CustomContainer(
             yazi: "CO2 Emisyon Ölçümü",
             subtext: oy6.toString(),
+            imagePath: "assets/Oylama/ZeroEmission.png",
             function: () {
               setState(() {
                 if (flag == 0) {
@@ -432,8 +425,9 @@ class _ListViewDemoState extends State<ListViewDemo> {
             },
           ),
           CustomContainer(
-            yazi: "Eko-Danismanlik Ofisi",
+            yazi: "Eko-Danışmanlık Ofisi",
             subtext: oy7.toString(),
+            imagePath: "assets/Oylama/helpdesk2.png",
             function: () {
               setState(() {
                 if (flag == 0) {
@@ -473,49 +467,9 @@ class _ListViewDemoState extends State<ListViewDemo> {
             },
           ),
           CustomContainer(
-            yazi: "Elektrikli Toplu Taşıma",
-            subtext: oy8.toString(),
-            function: () {
-              setState(() {
-                if (flag == 0) {
-                  oy8++;
-                  flag++;
-                  total++;
-                  FirebaseFirestore.instance
-                      .collection("Cities")
-                      .doc(iletilenArgumanlar.neighborhood)
-                      .update({"ElektrikliTopluTasima": oy8});
-                  FirebaseFirestore.instance
-                      .collection("Cities")
-                      .doc(iletilenArgumanlar.neighborhood)
-                      .update({"Total": total});
-                  showDialog(
-                    context: context,
-                    builder: (context) => CustomDialog(
-                      content: Text(
-                        'Oy Verildi',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                      title: Text("Desteğin için teşekkürler"),
-                      firstColor: Color(0xFF3CCF57),
-                      secondColor: Colors.white,
-                      headerIcon: Icon(
-                        Icons.check_circle_outline,
-                        size: 120.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                  );
-                }
-              });
-            },
-          ),
-          CustomContainer(
-            yazi: "Evlere Günes Paneli Kurulumu",
+            yazi: "Evlere Güneş Paneli Kurulumu",
             subtext: oy9.toString(),
+            imagePath: "assets/Oylama/solarev.png",
             function: () {
               setState(() {
                 if (flag == 0) {
@@ -557,6 +511,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
           CustomContainer(
             yazi: "Harabe Bina Şikayeti",
             subtext: oy10.toString(),
+            imagePath: "assets/Oylama/harabeev.png",
             function: () {
               setState(() {
                 if (flag == 0) {
@@ -620,7 +575,7 @@ class CustomContainer extends StatelessWidget {
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-        color: Colors.blue,
+        color: Color(0xffcbe2b0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
@@ -632,7 +587,7 @@ class CustomContainer extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.orange,
+                      color: Color(0xffece2e1),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -642,7 +597,8 @@ class CustomContainer extends StatelessWidget {
                           child: Text(
                             yazi,
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(
+                                fontSize: 18, color: Color(0xff495464)),
                           ),
                         ),
                         Center(
@@ -651,12 +607,19 @@ class CustomContainer extends StatelessWidget {
                             children: [
                               Text(
                                 subtext,
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xff495464),
+                                ),
                               ),
                               SizedBox(
                                 width: 5,
                               ),
-                              Icon(FontAwesomeIcons.plus, size: 15),
+                              Icon(
+                                FontAwesomeIcons.plus,
+                                size: 15,
+                                color: Color(0xff214252),
+                              ),
                             ],
                           ),
                         ),

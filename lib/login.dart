@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xFF0E0B12),
+        backgroundColor: Color(0xFFEC4646),
         body: Container(
           height: h,
           width: w,
@@ -46,6 +46,7 @@ class _LoginState extends State<Login> {
                   "Log In",
                   style: TextStyle(
                     fontSize: 40,
+                    fontFamily: "Poppins",
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -74,7 +75,7 @@ class _LoginState extends State<Login> {
                     "Log In",
                     style: kButtonTitle,
                   ),
-                  color: Colors.deepPurple,
+                  color: Color(0xFF51C2D5),
                   minWidth: 170,
                   padding: EdgeInsets.symmetric(vertical: 10),
                   shape: RoundedRectangleBorder(
@@ -98,7 +99,7 @@ class _LoginState extends State<Login> {
                           nextPage: "/register",
                           margin: 10,
                           buttonWidth: w / 4,
-                          color: Colors.deepPurple,
+                          color: Color(0xFF51C2D5),
                           widget: Center(
                             child: Text(
                               "Sign Up",

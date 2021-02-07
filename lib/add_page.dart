@@ -119,17 +119,38 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: (codeDialog == "123456") ? Colors.green : Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.teal,
-        title: Text('Add Requests'),
+        title: Text(
+          'Make Requests',
+          style: TextStyle(fontFamily: "Poppins"),
+        ),
       ),
       body: Center(
-        child: FlatButton(
-          color: Colors.teal,
-          textColor: Colors.white,
-          onPressed: () {
-            _displayTextInputDialog(context);
-          },
-          child: Text('Add Your Request for Local Authorities'),
+        child: Column(
+          children: [
+            Image.asset("assets/goverment.png"),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.all(10),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                color: Colors.teal,
+                textColor: Colors.white,
+                onPressed: () {
+                  _displayTextInputDialog(context);
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    'Send Your Requests to the Authorities and Make Something For Everyone.',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

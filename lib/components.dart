@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 const kHeadingStyle = TextStyle(
   fontSize: 60,
   fontWeight: FontWeight.bold,
-  color: Color(0xFF40c4ff),
+  color: Color(0xFFF2F2F2),
+  fontFamily: "Poppins",
 );
 
 const kSubHeading = TextStyle(
@@ -13,7 +14,8 @@ const kSubHeading = TextStyle(
 
 const kButtonTitle = TextStyle(
   fontSize: 25,
-  color: Colors.white,
+  color: Color(0xFFF2F2F2),
+  fontFamily: "Poppins",
 );
 
 class HeadingContainer extends StatelessWidget {

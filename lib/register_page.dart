@@ -28,7 +28,7 @@ class _RegisterState extends State<Register> {
     double w = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFF0E0B12),
+        backgroundColor: Color(0xFFEC4646),
         body: Container(
           width: w,
           height: h,
@@ -40,13 +40,14 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5),
                   child: Text(
                     "Sign Up",
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
+                      fontFamily: "Poppins",
                     ),
                   ),
                 ),
@@ -73,7 +74,7 @@ class _RegisterState extends State<Register> {
                     "Sign Up",
                     style: kButtonTitle,
                   ),
-                  color: Colors.deepPurple,
+                  color: Color(0xFF51C2D5),
                   minWidth: 150,
                   padding: EdgeInsets.symmetric(vertical: 10),
                   shape: RoundedRectangleBorder(

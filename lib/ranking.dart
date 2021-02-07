@@ -73,6 +73,7 @@ class _RankingsPageState extends State<RankingsPage> {
     List votes = [nairobiTotal, tokyoTotal, berlinTotal];
     votes.sort();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
           buttonBackgroundColor: Colors.white,
@@ -106,11 +107,15 @@ class _RankingsPageState extends State<RankingsPage> {
                   Navigator.of(context).pop();
                 },
               ),
-              title: Text("Rankings"),
+              title: Text(
+                "Rankings",
+                style:
+                    TextStyle(fontFamily: "Poppins", color: Color(0xfff4f9f9)),
+              ),
               pinned: false,
               expandedHeight: 198,
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset("assets/sliver.jpg"),
+                background: Image.asset("assets/ranking.png"),
               ),
             ),
             SliverList(
@@ -123,7 +128,12 @@ class _RankingsPageState extends State<RankingsPage> {
                       child: Center(
                         child: Column(
                           children: [
-                            Text("Nairobi", style: TextStyle(fontSize: 45)),
+                            Text("Nairobi",
+                                style: TextStyle(
+                                  fontSize: 45,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.bold,
+                                )),
                             Text("Total Votes: ${votes[2].toString()}",
                                 style: TextStyle(
                                     color: Colors.yellow[600], fontSize: 40)),
@@ -140,10 +150,18 @@ class _RankingsPageState extends State<RankingsPage> {
                       child: Center(
                         child: Column(
                           children: [
-                            Text("Berlin", style: TextStyle(fontSize: 45)),
+                            Text(
+                              "Berlin",
+                              style: TextStyle(
+                                  fontSize: 45,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.bold),
+                            ),
                             Text("Total Votes: ${votes[1].toString()}",
                                 style: TextStyle(
-                                    color: Colors.grey[600], fontSize: 40)),
+                                  color: Colors.grey[600],
+                                  fontSize: 40,
+                                )),
                           ],
                           mainAxisAlignment: MainAxisAlignment.center,
                         ),
@@ -157,7 +175,12 @@ class _RankingsPageState extends State<RankingsPage> {
                       child: Center(
                         child: Column(
                           children: [
-                            Text("Tokyo", style: TextStyle(fontSize: 45)),
+                            Text("Tokyo",
+                                style: TextStyle(
+                                  fontSize: 45,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.bold,
+                                )),
                             Text("Total Votes: ${votes[0].toString()}",
                                 style: TextStyle(
                                     color: Colors.deepOrange[800],
@@ -175,7 +198,13 @@ class _RankingsPageState extends State<RankingsPage> {
                       child: Center(
                         child: Column(
                           children: [
-                            Text("İstanbul", style: TextStyle(fontSize: 45)),
+                            Text(
+                              "İstanbul",
+                              style: TextStyle(
+                                  fontSize: 45,
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.bold),
+                            ),
                             Text("Total Votes: ${(votes[0] + 3).toString()}",
                                 style: TextStyle(
                                     color: Colors.deepOrange[800],

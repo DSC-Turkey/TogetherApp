@@ -17,7 +17,7 @@ class _SignUpState extends State<SignUp> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xFF0E0B12),
+        backgroundColor: Color(0xFFEC4646),
         body: Container(
           padding: EdgeInsets.symmetric(
             horizontal: 20,
@@ -32,20 +32,23 @@ class _SignUpState extends State<SignUp> {
               ),
               Stack(
                 children: [
-                  HeadingContainer(text: "START", bottompad: 0),
-                  HeadingContainer(text: "LEARNING", bottompad: 50),
-                  SubheadingContainer(
-                    text: "HELPING IS FUN",
+                  HeadingContainer(text: "JOIN", bottompad: 0),
+                  HeadingContainer(text: "US", bottompad: 50),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: SubheadingContainer(
+                      text: "Our Sustainability and Education and Us.",
+                    ),
                   ),
                 ],
               ),
-              Lottie.network(
-                "https://assets10.lottiefiles.com/packages/lf20_Jh1Mie.json",
-                width: 350,
-                height: 350,
+              Container(
+                height: 130,
+                child: Image.asset("assets/Logo.png"),
+                margin: EdgeInsets.fromLTRB(100, 90, 30, 30),
               ),
               ButtonFlat(
-                color: Color(0xFF664AFF),
+                color: Color(0xFF51C2D5),
                 buttonWidth: w,
                 nextPage: "/login",
                 widget: Container(

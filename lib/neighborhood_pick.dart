@@ -16,7 +16,7 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xFF0E0B12),
+        backgroundColor: Color(0xff9ad3bc),
         body: Container(
           padding: EdgeInsets.symmetric(
             horizontal: 20,
@@ -30,11 +30,12 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
-                    "Pick City",
+                    "Pick Your City",
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
+                      fontFamily: "Poppins",
                     ),
                   ),
                 ),
@@ -59,7 +60,8 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
                         );
                       }
                       return DropdownButton(
-                        style: TextStyle(color: Colors.blue),
+                        style:
+                            TextStyle(color: Color(0xFF056676), fontSize: 26),
                         items: sehirler,
                         onChanged: (neighborhood) {
                           setState(() {
@@ -71,6 +73,7 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
                     }
                   },
                 ),
+                SizedBox(height: 15),
                 FlatButton(
                   onPressed: () {
                     Navigator.pushNamed(
@@ -84,6 +87,12 @@ class _NeighborhoodPageState extends State<NeighborhoodPage> {
                   child: Text(
                     "Continue",
                     style: kButtonTitle,
+                  ),
+                  color: Color(0xFF056676),
+                  minWidth: 150,
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
                 ),
               ],

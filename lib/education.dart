@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Iskele(),
     );
   }
@@ -79,7 +80,10 @@ class _IskeleState extends State<Iskele> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Eğitim"),
+        title: Text(
+          "Eğitim",
+          style: TextStyle(fontFamily: "Poppins"),
+        ),
         centerTitle: true,
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -109,31 +113,72 @@ class _IskeleState extends State<Iskele> {
         margin: EdgeInsets.all(5),
         child: Center(
           child: Container(
-            padding: EdgeInsets.only(top: 250),
+            padding: EdgeInsets.only(top: 20),
             child: Column(
               children: [
-                TextField(
-                  controller: t1,
+                Image.asset("assets/Education.png"),
+                SizedBox(
+                  height: 10,
                 ),
                 TextField(
+                  controller: t1,
+                  decoration: InputDecoration(
+                    labelText: "Ders Adı ve Saati",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: "Google Meet Linki",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
                   controller: t2,
                 ),
                 Row(
                   children: [
-                    RaisedButton(
-                        child: Text("Ders Ekle"),
-                        onPressed: () {
-                          yaziEkle();
-                          yaziGetir();
-                        }),
-                    RaisedButton(child: Text("Sil"), onPressed: yaziSil),
-                    RaisedButton(
+                    Expanded(
+                      child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text("Ders Ekle"),
+                          onPressed: () {
+                            yaziEkle();
+                            yaziGetir();
+                          }),
+                    ),
+                    Expanded(
+                      child: RaisedButton(
                         child: Text(
-                          "Dersleri Görüntüle",
+                          "Sil",
+                          style: TextStyle(fontFamily: "Poppins"),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/lessons");
-                        }),
+                        onPressed: yaziSil,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text(
+                            "Dersleri Görüntüle",
+                            textAlign: TextAlign.center,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/lessons");
+                          }),
+                    ),
                   ],
                 ),
                 ListTile(

@@ -16,7 +16,7 @@ class _WelcomeState extends State<Welcome> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xFF0E0B12),
+        backgroundColor: Color(0xFFF4B400),
         body: Container(
           height: h,
           width: w,
@@ -32,31 +32,40 @@ class _WelcomeState extends State<Welcome> {
                 child: Stack(
                   children: [
                     HeadingContainer(
-                      text: "HELP ME",
+                      text: "TOGETHER",
                       bottompad: 0,
                     ),
                     HeadingContainer(
-                      text: "NOW!",
+                      text: "CHANGE",
                       bottompad: 50,
                     ),
-                    SubheadingContainer(text: "Save Lives"),
                   ],
                 ),
               ),
+              Text(
+                "Vote to Help Your Society to Achieve a Sustainable City and High Quality Education.",
+                style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: 16,
+                    color: Color(0xFFF2F2F2)),
+              ),
               Center(
-                child: Lottie.network(
-                  "https://assets10.lottiefiles.com/private_files/lf30_wwq2op12.json",
-                  height: 250,
-                  width: 250,
+                child: Lottie.asset(
+                  "assets/34065-growth.json",
+                  height: 350,
+                  width: 350,
                 ),
+              ),
+              SizedBox(
+                height: 20,
               ),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 170),
+                  padding: const EdgeInsets.only(top: 80),
                   child: ButtonFlat(
                     margin: 10,
                     buttonWidth: w / 3,
-                    color: Colors.deepPurple,
+                    color: Color(0xFFDB4437),
                     nextPage: "/signup",
                     widget: Center(
                       child: Text(
