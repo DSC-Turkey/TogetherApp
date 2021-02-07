@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:login_screen2/login.dart';
 import 'package:login_screen2/neighboorhood_page.dart';
+import 'package:login_screen2/ranking.dart';
 import 'package:login_screen2/register_page.dart';
 import 'package:login_screen2/welcome.dart';
 import 'package:login_screen2/sign_up.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         "/neighborhood": (context) => NeighborhoodPage(),
         "/page": (context) => Neighborhood(),
         "/gridview": (context) => ListViewDemo(),
+        "/rankings": (context) => RankingsPage(),
       },
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,

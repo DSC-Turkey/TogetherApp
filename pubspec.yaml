@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  custom_dialog: ^0.0.2
   font_awesome_flutter: ^8.11.0
   curved_navigation_bar: ^0.3.7
   pedantic: ^1.9.0

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:login_screen2/neighborhood_pick.dart';
+import 'package:custom_dialog/custom_dialog.dart';
 
 class ListViewDemo extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class ListViewDemo extends StatefulWidget {
 }
 
 class _ListViewDemoState extends State<ListViewDemo> {
+  List pages = ["/add", "/rankings"];
   int _selectedIndex = 0;
   var gelenOy;
   var gelenOy2;
@@ -21,6 +23,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
   var gelenOy8;
   var gelenOy9;
   var gelenOy10;
+  int flag = 0;
 
   void _onItemTap(int index) {
     setState(() {
@@ -48,6 +51,17 @@ class _ListViewDemoState extends State<ListViewDemo> {
         .get();
     setState(() {
       gelenOy = response.data()[key];
+    });
+    return gelenOy;
+  }
+
+  Future<int> fetchTotalData(Sehir sehir) async {
+    final response = await FirebaseFirestore.instance
+        .collection("Cities")
+        .doc(sehir.neighborhood)
+        .get();
+    setState(() {
+      gelenOy = response.data()["Total"];
     });
     return gelenOy;
   }
@@ -89,19 +103,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
       });
     });
     return gelenOy4;
-  }
-
-  int oyGetir5(Sehir sehir) {
-    FirebaseFirestore.instance
-        .collection("Cities")
-        .doc(sehir.neighborhood)
-        .get()
-        .then((gelenVeri) {
-      setState(() {
-        gelenOy5 = gelenVeri.data()["BisikletIstasyonlarıVeYollari"];
-      });
-    });
-    return gelenOy5;
   }
 
   int oyGetir6(Sehir sehir) {
@@ -176,7 +177,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
     int oy2 = oyGetir2(iletilenArgumanlar);
     int oy3 = oyGetir3(iletilenArgumanlar);
     int oy4 = oyGetir4(iletilenArgumanlar);
-    int oy5 = oyGetir5(iletilenArgumanlar);
     int oy6 = oyGetir6(iletilenArgumanlar);
     int oy7 = oyGetir7(iletilenArgumanlar);
     int oy8 = oyGetir8(iletilenArgumanlar);
@@ -184,6 +184,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
     int oy10 = oyGetir10(iletilenArgumanlar);
     var _screenWidth = MediaQuery.of(context).size.width;
     var _itemCount = (_screenWidth / 200).ceil();
+    int total = oy + oy2 + oy3 + oy4 + oy6 + oy7 + oy8 + oy9 + oy10;
 
     return Scaffold(
       extendBody: true,
@@ -192,10 +193,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
         backgroundColor: Colors.transparent,
         height: 50,
         items: [
-          Icon(
-            Icons.home,
-            size: 30,
-          ),
           Icon(
             FontAwesomeIcons.plus,
             size: 35,
@@ -207,6 +204,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
         ],
         onTap: (index) {
           _onItemTap(index);
+          Navigator.pushNamed(context, pages[index]);
         },
       ),
       appBar: AppBar(
@@ -223,42 +221,371 @@ class _ListViewDemoState extends State<ListViewDemo> {
             yazi: "Geri Dönüşüm",
             subtext: oy.toString(),
             imagePath: "assets/eco_ev.jpg",
+            function: () {
+              total++;
+              setState(() {
+                if (flag == 0) {
+                  oy++;
+                  flag++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"GeriDonusum": oy});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
           CustomContainer(
             yazi: "Güneş Enerjili Sokak Lambaları",
             subtext: oy2.toString(),
+            function: () {
+              setState(() {
+                total++;
+                if (flag == 0) {
+                  oy2++;
+                  //flag++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"GunesEnerjiliSokakLambalari": oy2});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
           CustomContainer(
             yazi: "Yeşil Alan",
             subtext: oy3.toString(),
+            function: () {
+              setState(() {
+                if (flag == 0) {
+                  oy3++;
+                  flag++;
+                  total++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"YesilAlan": oy3});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
           CustomContainer(
             yazi: "Organik Pazar",
             subtext: oy4.toString(),
-          ),
-          CustomContainer(
-            yazi: "Bisiklet İstasyonu",
-            subtext: oy5.toString(),
+            function: () {
+              setState(() {
+                if (flag == 0) {
+                  oy4++;
+                  flag++;
+                  total++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"OrganikPazar": oy4});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
           CustomContainer(
             yazi: "CO2 Emisyon Ölçümü",
             subtext: oy6.toString(),
+            function: () {
+              setState(() {
+                if (flag == 0) {
+                  oy6++;
+                  flag++;
+                  total++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"CO2EmisyonOlcumu": oy6});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
           CustomContainer(
             yazi: "Eko-Danismanlik Ofisi",
             subtext: oy7.toString(),
+            function: () {
+              setState(() {
+                if (flag == 0) {
+                  oy7++;
+                  flag++;
+                  total++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"EkoDanismanlikOfisi": oy7});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
           CustomContainer(
             yazi: "Elektrikli Toplu Taşıma",
             subtext: oy8.toString(),
+            function: () {
+              setState(() {
+                if (flag == 0) {
+                  oy8++;
+                  flag++;
+                  total++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"ElektrikliTopluTasima": oy8});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
           CustomContainer(
             yazi: "Evlere Günes Paneli Kurulumu",
             subtext: oy9.toString(),
+            function: () {
+              setState(() {
+                if (flag == 0) {
+                  oy9++;
+                  flag++;
+                  total++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"EvlereGunesPaneliKurulumu": oy9});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
           CustomContainer(
             yazi: "Harabe Bina Şikayeti",
             subtext: oy10.toString(),
+            function: () {
+              setState(() {
+                if (flag == 0) {
+                  oy10++;
+                  flag++;
+                  total++;
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"HarabeBinaSikayeti": oy10});
+                  FirebaseFirestore.instance
+                      .collection("Cities")
+                      .doc(iletilenArgumanlar.neighborhood)
+                      .update({"Total": total});
+                  showDialog(
+                    context: context,
+                    builder: (context) => CustomDialog(
+                      content: Text(
+                        'Oy Verildi',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      title: Text("Desteğin için teşekkürler"),
+                      firstColor: Color(0xFF3CCF57),
+                      secondColor: Colors.white,
+                      headerIcon: Icon(
+                        Icons.check_circle_outline,
+                        size: 120.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
           ),
         ],
       ),
@@ -276,7 +603,7 @@ class CustomContainer extends StatelessWidget {
     this.function,
     this.yazi = "",
     this.subtext = "",
-    this.imagePath = "",
+    this.imagePath = "assets/eco_ev.jpg",
   });
 
   @override
