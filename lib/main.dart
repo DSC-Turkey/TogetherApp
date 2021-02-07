@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:login_screen2/add_page.dart';
+import 'package:login_screen2/education.dart';
+import 'package:login_screen2/lessons.dart';
 import 'package:login_screen2/login.dart';
 import 'package:login_screen2/neighboorhood_page.dart';
 import 'package:login_screen2/ranking.dart';
@@ -31,6 +34,9 @@ class MyApp extends StatelessWidget {
         "/page": (context) => Neighborhood(),
         "/gridview": (context) => ListViewDemo(),
         "/rankings": (context) => RankingsPage(),
+        "/education": (context) => Iskele(),
+        "/lessons": (context) => AnaSayfa(),
+        "/add": (context) => MyHomePage(),
       },
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,

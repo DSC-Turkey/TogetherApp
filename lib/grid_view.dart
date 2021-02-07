@@ -11,7 +11,11 @@ class ListViewDemo extends StatefulWidget {
 }
 
 class _ListViewDemoState extends State<ListViewDemo> {
-  List pages = ["/add", "/rankings"];
+  List pages = [
+    "/rankings",
+    "/add",
+    "/education",
+  ];
   int _selectedIndex = 0;
   var gelenOy;
   var gelenOy2;
@@ -194,13 +198,17 @@ class _ListViewDemoState extends State<ListViewDemo> {
         height: 50,
         items: [
           Icon(
+            FontAwesomeIcons.trophy,
+            size: 24,
+          ),
+          Icon(
             FontAwesomeIcons.plus,
             size: 35,
           ),
           Icon(
-            FontAwesomeIcons.trophy,
+            FontAwesomeIcons.graduationCap,
             size: 24,
-          ),
+          )
         ],
         onTap: (index) {
           _onItemTap(index);

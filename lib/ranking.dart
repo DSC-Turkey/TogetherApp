@@ -17,7 +17,11 @@ class _RankingsPageState extends State<RankingsPage> {
   var nairobiTotal;
   var tokyoTotal;
   var berlinTotal;
-  List pages = ["/gridview", "/add", "/rankings"];
+  List pages = [
+    "/rankings",
+    "/add",
+    "/education",
+  ];
 
   void _onItemTap(int index) {
     setState(() {
@@ -76,21 +80,32 @@ class _RankingsPageState extends State<RankingsPage> {
           height: 50,
           items: [
             Icon(
+              FontAwesomeIcons.trophy,
+              size: 24,
+            ),
+            Icon(
               FontAwesomeIcons.plus,
               size: 35,
             ),
             Icon(
-              FontAwesomeIcons.trophy,
+              FontAwesomeIcons.graduationCap,
               size: 24,
-            ),
+            )
           ],
           onTap: (index) {
             _onItemTap(index);
+            Navigator.pushNamed(context, pages[index]);
           },
         ),
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
               title: Text("Rankings"),
               pinned: false,
               expandedHeight: 198,
